@@ -61,7 +61,7 @@ export default async function AdminDashboardPage() {
     <div className="space-y-8">
       {/* HEADER */}
       <div className="space-y-2">
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+        <h1 className="text-3xl sm:text-4xl font-heading font-bold tracking-tight text-card-foreground">
           Dashboard Admin
         </h1>
         <p className="text-muted-foreground">
@@ -72,23 +72,23 @@ export default async function AdminDashboardPage() {
       {/* STAT CARDS */}
       <div className="grid gap-4 sm:grid-cols-2">
         {/* Total Booking */}
-        <Card className="overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border-slate-200/80 dark:border-slate-800 hover:shadow-lg transition-shadow">
+        <Card className="overflow-hidden bg-card border-border hover:shadow-lg transition-shadow">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              <CardTitle className="text-sm font-semibold text-muted-foreground">
                 Total Booking
               </CardTitle>
-              <Users className="h-5 w-5 text-indigo-500" />
+              <Users className="h-5 w-5 text-primary" />
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-slate-900 dark:text-slate-50">{totalBookings}</p>
+            <p className="text-3xl font-mono font-bold text-card-foreground">{totalBookings}</p>
             <div className="mt-3 flex gap-2 text-xs font-medium">
-              <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+              <span className="flex items-center gap-1 text-primary">
                 <CheckCircle className="h-3 w-3" />
                 {confirmedBookings} Terkonfirmasi
               </span>
-              <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400">
+              <span className="flex items-center gap-1 text-secondary">
                 <Clock className="h-3 w-3" />
                 {pendingBookings} Menunggu
               </span>
@@ -97,17 +97,17 @@ export default async function AdminDashboardPage() {
         </Card>
 
         {/* Total Pendapatan */}
-        <Card className="overflow-hidden bg-gradient-to-br from-indigo-50/40 to-sky-50/40 dark:from-indigo-950/20 dark:to-slate-900/40 border-indigo-100/50 dark:border-indigo-900/30 hover:shadow-lg transition-shadow">
+        <Card className="overflow-hidden bg-card border-border hover:shadow-lg transition-shadow">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              <CardTitle className="text-sm font-semibold text-muted-foreground">
                 Total Pendapatan
               </CardTitle>
-              <TrendingUp className="h-5 w-5 text-indigo-500" />
+              <TrendingUp className="h-5 w-5 text-primary" />
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">
+            <p className="text-3xl font-mono font-bold text-primary">
               {formatCurrency(totalRevenue)}
             </p>
             <p className="mt-2 text-xs text-muted-foreground">
@@ -120,31 +120,31 @@ export default async function AdminDashboardPage() {
       {/* BOOKING TERBARU */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Clock className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight">
+          <Clock className="h-5 w-5 text-primary" />
+          <h2 className="text-lg font-bold text-card-foreground tracking-tight">
             Booking Terbaru
           </h2>
         </div>
 
-        <div className="rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm">
+        <div className="rounded-none overflow-hidden border border-border bg-card">
           <Table>
-            <TableHeader className="bg-slate-50/50 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800">
+            <TableHeader className="bg-muted/50 border-b border-border">
               <TableRow className="hover:bg-transparent">
-                <TableHead className="font-semibold text-slate-700 dark:text-slate-300">ID</TableHead>
-                <TableHead className="font-semibold text-slate-700 dark:text-slate-300">Pemesan</TableHead>
-                <TableHead className="font-semibold text-slate-700 dark:text-slate-300">Paket</TableHead>
-                <TableHead className="font-semibold text-slate-700 dark:text-slate-300">Tanggal</TableHead>
-                <TableHead className="font-semibold text-slate-700 dark:text-slate-300">Total</TableHead>
-                <TableHead className="font-semibold text-slate-700 dark:text-slate-300">Status</TableHead>
+                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">ID</TableHead>
+                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Pemesan</TableHead>
+                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Paket</TableHead>
+                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Tanggal</TableHead>
+                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Total</TableHead>
+                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {bookings.map((booking) => (
                 <TableRow
                   key={booking.id}
-                  className="border-slate-100 dark:border-slate-800/50 hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors"
+                  className="border-border hover:bg-muted/30 transition-colors"
                 >
-                  <TableCell className="font-medium text-indigo-600 dark:text-indigo-400">
+                  <TableCell className="font-medium text-primary">
                     <Link
                       href={`/transactions/${booking.id}`}
                       className="hover:underline"
@@ -152,10 +152,10 @@ export default async function AdminDashboardPage() {
                       #{booking.id}
                     </Link>
                   </TableCell>
-                  <TableCell className="text-slate-700 dark:text-slate-300">
+                  <TableCell className="text-card-foreground">
                     {booking.customerName}
                   </TableCell>
-                  <TableCell className="text-slate-600 dark:text-slate-400 text-sm">
+                  <TableCell className="text-muted-foreground text-sm">
                     {booking.schedule.package.name}
                   </TableCell>
                   <TableCell className="text-slate-600 dark:text-slate-400 text-sm">
