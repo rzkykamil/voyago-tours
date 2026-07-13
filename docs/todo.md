@@ -16,8 +16,8 @@
 - [x] Build `/admin/pricing` (edit hotel/activity/vehicle prices) + `/admin/packages` (CRUD)
 
 ## Day 3 — Polish & Publish
-- [ ] Responsive/UI polish pass on public pages
-- [ ] Edge case check: overbooked vehicle, 0 participants, missing fields
+- [x] Responsive/UI polish pass on public pages
+- [x] Edge case check: overbooked vehicle, 0 participants, missing fields
 - [ ] Write final README (screenshots, features, setup steps)
 - [ ] `git init`, initial commit, verify `.env` not tracked
 - [ ] Push to GitHub as public repo (after explicit confirmation)
