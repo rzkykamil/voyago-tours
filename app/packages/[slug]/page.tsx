@@ -2,10 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -108,6 +110,20 @@ export default async function PackageDetailPage({ params }: PackagePageProps) {
                     {isFull ? "Penuh" : "Tersedia"}
                   </Badge>
                 </CardContent>
+                <CardFooter>
+                  {isFull ? (
+                    <Button size="sm" disabled>
+                      Kuota Penuh
+                    </Button>
+                  ) : (
+                    <Button
+                      size="sm"
+                      render={<Link href={`/packages/${pkg.slug}/book/${schedule.id}`} />}
+                    >
+                      Pesan Sekarang
+                    </Button>
+                  )}
+                </CardFooter>
               </Card>
             );
           })}

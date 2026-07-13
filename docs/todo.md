@@ -9,11 +9,11 @@
 - [x] Build `/packages/[slug]` detail page with schedules list
 
 ## Day 2 — Booking Logic & Admin
-- [ ] Build live price calculator (participants × hotel + activities + vehicle)
-- [ ] Build booking form + server action with capacity validation
-- [ ] Build `/transactions/[bookingId]` detail page
-- [ ] Build demo admin login (cookie session) + `/admin` dashboard (list bookings/stats)
-- [ ] Build `/admin/pricing` (edit hotel/activity/vehicle prices) + `/admin/packages` (CRUD)
+- [x] Build live price calculator (participants × hotel + activities + vehicle)
+- [x] Build booking form + server action with capacity validation
+- [x] Build `/transactions/[bookingId]` detail page
+- [x] Build demo admin login (cookie session) + `/admin` dashboard (list bookings/stats)
+- [x] Build `/admin/pricing` (edit hotel/activity/vehicle prices) + `/admin/packages` (CRUD)
 
 ## Day 3 — Polish & Publish
 - [ ] Responsive/UI polish pass on public pages
