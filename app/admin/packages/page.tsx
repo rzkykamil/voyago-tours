@@ -33,7 +33,7 @@ export default async function AdminPackagesPage() {
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-card-foreground">
               Kelola Paket
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
@@ -42,7 +42,7 @@ export default async function AdminPackagesPage() {
           </div>
           <Button
             render={<Link href="/admin/packages/new" />}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold flex items-center gap-2 w-fit"
+            className="bg-primary hover:bg-primary text-white font-semibold flex items-center gap-2 w-fit"
           >
             <Plus className="h-4 w-4" />
             Tambah Paket
@@ -55,32 +55,32 @@ export default async function AdminPackagesPage() {
         <Table>
           <TableHeader className="bg-slate-50/50 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800">
             <TableRow className="hover:bg-transparent">
-              <TableHead className="font-semibold text-slate-700 dark:text-slate-300">
+              <TableHead className="font-semibold text-card-foreground">
                 <div className="flex items-center gap-2">
                   <Package className="h-4 w-4" />
                   Nama
                 </div>
               </TableHead>
-              <TableHead className="font-semibold text-slate-700 dark:text-slate-300">
+              <TableHead className="font-semibold text-card-foreground">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
                   Destinasi
                 </div>
               </TableHead>
-              <TableHead className="font-semibold text-slate-700 dark:text-slate-300">
+              <TableHead className="font-semibold text-card-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
                   Durasi
                 </div>
               </TableHead>
-              <TableHead className="font-semibold text-slate-700 dark:text-slate-300">
+              <TableHead className="font-semibold text-card-foreground">
                 <div className="flex items-center gap-2">
                   <Zap className="h-4 w-4" />
                   Aktivitas
                 </div>
               </TableHead>
-              <TableHead className="font-semibold text-slate-700 dark:text-slate-300">Jadwal</TableHead>
-              <TableHead className="text-right font-semibold text-slate-700 dark:text-slate-300">Aksi</TableHead>
+              <TableHead className="font-semibold text-card-foreground">Jadwal</TableHead>
+              <TableHead className="text-right font-semibold text-card-foreground">Aksi</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -89,7 +89,7 @@ export default async function AdminPackagesPage() {
                 key={pkg.id}
                 className="border-slate-100 dark:border-slate-800/50 hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors"
               >
-                <TableCell className="font-semibold text-slate-800 dark:text-slate-100">
+                <TableCell className="font-semibold text-card-foreground">
                   {pkg.name}
                 </TableCell>
                 <TableCell className="text-slate-600 dark:text-slate-400">
@@ -99,12 +99,12 @@ export default async function AdminPackagesPage() {
                   {pkg.durationDays} hari
                 </TableCell>
                 <TableCell className="text-center">
-                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs font-semibold">
+                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-indigo-100 dark:bg-primary/20 text-primary dark:text-indigo-300 text-xs font-semibold">
                     {pkg._count.activities}
                   </span>
                 </TableCell>
                 <TableCell className="text-center">
-                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 text-xs font-semibold">
+                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-secondary-100 dark:bg-secondary-950 text-secondary-700 dark:text-secondary-300 text-xs font-semibold">
                     {pkg._count.schedules}
                   </span>
                 </TableCell>

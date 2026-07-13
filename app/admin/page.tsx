@@ -161,7 +161,7 @@ export default async function AdminDashboardPage() {
                   <TableCell className="text-slate-600 dark:text-slate-400 text-sm">
                     {formatDate(booking.createdAt)}
                   </TableCell>
-                  <TableCell className="font-semibold text-slate-800 dark:text-slate-100">
+                  <TableCell className="font-semibold text-card-foreground">
                     {formatCurrency(booking.totalPrice)}
                   </TableCell>
                   <TableCell>

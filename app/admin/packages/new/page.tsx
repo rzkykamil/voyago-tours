@@ -15,7 +15,7 @@ export default function NewPackagePage() {
       <div>
         <Link
           href="/admin/packages"
-          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-indigo-600 transition-colors group"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors group"
         >
           <ArrowLeft className="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" />
           Kembali ke daftar paket
@@ -25,12 +25,12 @@ export default function NewPackagePage() {
       {/* HEADER */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <Plus className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+          <Plus className="h-6 w-6 text-primary dark:text-primary" />
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-card-foreground">
             Tambah Paket Baru
           </h1>
         </div>
-        <p className="text-slate-600 dark:text-slate-300">
+        <p className="text-muted-foreground">
           Buat paket tour baru untuk katalog Voyago Tours
         </p>
       </div>

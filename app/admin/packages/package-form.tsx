@@ -31,13 +31,13 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
       {/* SECTION 1: BASIC INFO */}
       <div className="space-y-4 rounded-xl overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 p-6">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
-          <Package className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-          <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 tracking-tight">Informasi Dasar</h3>
+          <Package className="h-5 w-5 text-primary dark:text-primary" />
+          <h3 className="text-sm font-bold text-card-foreground tracking-tight">Informasi Dasar</h3>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-1.5">
-            <Label htmlFor="name" className="text-slate-700 dark:text-slate-300 font-medium">Nama Paket</Label>
+            <Label htmlFor="name" className="text-card-foreground font-medium">Nama Paket</Label>
             <Input
               id="name"
               name="name"
@@ -48,7 +48,7 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="slug" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-medium">
+            <Label htmlFor="slug" className="flex items-center gap-2 text-card-foreground font-medium">
               <LinkIcon className="h-4 w-4 text-slate-400" />
               Slug
             </Label>
@@ -65,7 +65,7 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-1.5">
-            <Label htmlFor="destination" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-medium">
+            <Label htmlFor="destination" className="flex items-center gap-2 text-card-foreground font-medium">
               <MapPin className="h-4 w-4 text-slate-400" />
               Destinasi
             </Label>
@@ -79,7 +79,7 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="durationDays" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-medium">
+            <Label htmlFor="durationDays" className="flex items-center gap-2 text-card-foreground font-medium">
               <Clock className="h-4 w-4 text-slate-400" />
               Durasi (hari)
             </Label>
@@ -99,12 +99,12 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
       {/* SECTION 2: IMAGE & DESCRIPTION */}
       <div className="space-y-4 rounded-xl overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 p-6">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
-          <FileText className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-          <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 tracking-tight">Konten</h3>
+          <FileText className="h-5 w-5 text-primary dark:text-primary" />
+          <h3 className="text-sm font-bold text-card-foreground tracking-tight">Konten</h3>
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="imageUrl" className="text-slate-700 dark:text-slate-300 font-medium">URL Gambar (opsional)</Label>
+          <Label htmlFor="imageUrl" className="text-card-foreground font-medium">URL Gambar (opsional)</Label>
           <Input
             id="imageUrl"
             name="imageUrl"
@@ -116,7 +116,7 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="description" className="text-slate-700 dark:text-slate-300 font-medium">Deskripsi</Label>
+          <Label htmlFor="description" className="text-card-foreground font-medium">Deskripsi</Label>
           <Textarea
             id="description"
             name="description"
@@ -131,8 +131,8 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
 
       {/* ERROR MESSAGE */}
       {state.error && (
-        <div className="flex items-start gap-2 rounded-lg bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 p-3">
-          <p className="text-sm text-rose-700 dark:text-rose-300 font-medium">{state.error}</p>
+        <div className="flex items-start gap-2 rounded-lg bg-destructive-50 dark:bg-destructive-950/20 border border-destructive-200 dark:border-destructive-900/40 p-3">
+          <p className="text-sm text-destructive-700 dark:text-destructive-300 font-medium">{state.error}</p>
         </div>
       )}
 
@@ -140,7 +140,7 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg shadow-sm hover:shadow transition-all"
+        className="w-full bg-primary hover:bg-primary text-white font-semibold py-3 rounded-lg shadow-sm hover:shadow transition-all"
       >
         {isPending ? "Menyimpan..." : submitLabel}
       </Button>
