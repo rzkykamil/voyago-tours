@@ -1,12 +1,12 @@
 # Todo
 
 ## Day 1 — Scaffold & Core Data Flow
-- [ ] `npx create-next-app` (App Router, TypeScript, Tailwind)
-- [ ] Install & init Prisma with SQLite; init shadcn/ui
-- [ ] Define Prisma schema (Package, Activity, HotelOption, Vehicle, Schedule, Booking)
-- [ ] Write seed script with fictional Voyago Tours packages/destinations
-- [ ] Build `/packages` catalog page (list from DB)
-- [ ] Build `/packages/[slug]` detail page with schedules list
+- [x] `npx create-next-app` (App Router, TypeScript, Tailwind)
+- [x] Install & init Prisma with SQLite; init shadcn/ui
+- [x] Define Prisma schema (Package, Activity, HotelOption, Vehicle, Schedule, Booking)
+- [x] Write seed script with fictional Voyago Tours packages/destinations
+- [x] Build `/packages` catalog page (list from DB)
+- [x] Build `/packages/[slug]` detail page with schedules list
 
 ## Day 2 — Booking Logic & Admin
 - [ ] Build live price calculator (participants × hotel + activities + vehicle)

@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Package {
+  id            Int        @id @default(autoincrement())
+  name          String
+  slug          String     @unique
+  destination   String
+  description   String
+  durationDays  Int
+  imageUrl      String?
+  activities    Activity[]
+  schedules     Schedule[]
+  createdAt     DateTime   @default(now())
+}
+
+model Activity {
+  id             Int     @id @default(autoincrement())
+  name           String
+  pricePerPerson Int
+  package        Package @relation(fields: [packageId], references: [id])
+  packageId      Int
+}
+
+model HotelOption {
+  id                     Int       @id @default(autoincrement())
+  name                   String
+  pricePerPersonPerNight Int
+  bookings               Booking[]
+}
+
+model Vehicle {
+  id           Int        @id @default(autoincrement())
+  name         String
+  capacity     Int
+  pricePerTrip Int
+  schedules    Schedule[]
+}
+
+model Schedule {
+  id            Int       @id @default(autoincrement())
+  package       Package   @relation(fields: [packageId], references: [id])
+  packageId     Int
+  vehicle       Vehicle   @relation(fields: [vehicleId], references: [id])
+  vehicleId     Int
+  departureDate DateTime
+  seatsBooked   Int       @default(0)
+  bookings      Booking[]
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model Booking {
+  id                Int           @id @default(autoincrement())
+  schedule          Schedule      @relation(fields: [scheduleId], references: [id])
+  scheduleId        Int
+  hotelOption       HotelOption   @relation(fields: [hotelOptionId], references: [id])
+  hotelOptionId     Int
+  customerName      String
+  customerEmail     String
+  customerPhone     String
+  participantCount  Int
+  totalPrice        Int
+  status            BookingStatus @default(PENDING)
+  createdAt         DateTime      @default(now())
+}
