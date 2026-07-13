@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { PackageFormState } from "./actions";
+import { Package, MapPin, Clock, Link as LinkIcon, FileText } from "lucide-react";
 
 type PackageFormProps = {
   action: (prevState: PackageFormState, formData: FormData) => Promise<PackageFormState>;
@@ -26,57 +27,121 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
   const [state, formAction, isPending] = useActionState(action, initialState);
 
   return (
-    <form action={formAction} className="mt-6 space-y-4">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5">
-          <Label htmlFor="name">Nama Paket</Label>
-          <Input id="name" name="name" defaultValue={defaultValues?.name} required />
+    <form action={formAction} className="mt-6 space-y-6 max-w-2xl">
+      {/* SECTION 1: BASIC INFO */}
+      <div className="space-y-4 rounded-xl overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 p-6">
+        <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
+          <Package className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+          <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 tracking-tight">Informasi Dasar</h3>
         </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="slug">Slug</Label>
-          <Input id="slug" name="slug" defaultValue={defaultValues?.slug} required />
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-1.5">
+            <Label htmlFor="name" className="text-slate-700 dark:text-slate-300 font-medium">Nama Paket</Label>
+            <Input
+              id="name"
+              name="name"
+              placeholder="Bali Adventure"
+              defaultValue={defaultValues?.name}
+              className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+              required
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="slug" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-medium">
+              <LinkIcon className="h-4 w-4 text-slate-400" />
+              Slug
+            </Label>
+            <Input
+              id="slug"
+              name="slug"
+              placeholder="bali-adventure"
+              defaultValue={defaultValues?.slug}
+              className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-1.5">
+            <Label htmlFor="destination" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-medium">
+              <MapPin className="h-4 w-4 text-slate-400" />
+              Destinasi
+            </Label>
+            <Input
+              id="destination"
+              name="destination"
+              placeholder="Bali, Indonesia"
+              defaultValue={defaultValues?.destination}
+              className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+              required
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="durationDays" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-medium">
+              <Clock className="h-4 w-4 text-slate-400" />
+              Durasi (hari)
+            </Label>
+            <Input
+              id="durationDays"
+              name="durationDays"
+              type="number"
+              min={1}
+              defaultValue={defaultValues?.durationDays ?? 1}
+              className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+              required
+            />
+          </div>
         </div>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+
+      {/* SECTION 2: IMAGE & DESCRIPTION */}
+      <div className="space-y-4 rounded-xl overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 p-6">
+        <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
+          <FileText className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+          <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 tracking-tight">Konten</h3>
+        </div>
+
         <div className="space-y-1.5">
-          <Label htmlFor="destination">Destinasi</Label>
+          <Label htmlFor="imageUrl" className="text-slate-700 dark:text-slate-300 font-medium">URL Gambar (opsional)</Label>
           <Input
-            id="destination"
-            name="destination"
-            defaultValue={defaultValues?.destination}
+            id="imageUrl"
+            name="imageUrl"
+            placeholder="https://example.com/image.jpg"
+            defaultValue={defaultValues?.imageUrl ?? ""}
+            className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+          />
+          <p className="text-xs text-muted-foreground">Gambar cover untuk paket tour (URL lengkap)</p>
+        </div>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="description" className="text-slate-700 dark:text-slate-300 font-medium">Deskripsi</Label>
+          <Textarea
+            id="description"
+            name="description"
+            rows={5}
+            placeholder="Jelaskan paket tour ini secara detail, termasuk apa yang akan dilakukan dan pengalaman yang didapat..."
+            defaultValue={defaultValues?.description}
+            className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 resize-none"
             required
           />
         </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="durationDays">Durasi (hari)</Label>
-          <Input
-            id="durationDays"
-            name="durationDays"
-            type="number"
-            min={1}
-            defaultValue={defaultValues?.durationDays ?? 1}
-            required
-          />
+      </div>
+
+      {/* ERROR MESSAGE */}
+      {state.error && (
+        <div className="flex items-start gap-2 rounded-lg bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 p-3">
+          <p className="text-sm text-rose-700 dark:text-rose-300 font-medium">{state.error}</p>
         </div>
-      </div>
-      <div className="space-y-1.5">
-        <Label htmlFor="imageUrl">URL Gambar (opsional)</Label>
-        <Input id="imageUrl" name="imageUrl" defaultValue={defaultValues?.imageUrl ?? ""} />
-      </div>
-      <div className="space-y-1.5">
-        <Label htmlFor="description">Deskripsi</Label>
-        <Textarea
-          id="description"
-          name="description"
-          rows={4}
-          defaultValue={defaultValues?.description}
-          required
-        />
-      </div>
+      )}
 
-      {state.error && <p className="text-sm text-destructive">{state.error}</p>}
-
-      <Button type="submit" disabled={isPending}>
+      {/* SUBMIT BUTTON */}
+      <Button
+        type="submit"
+        disabled={isPending}
+        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg shadow-sm hover:shadow transition-all"
+      >
         {isPending ? "Menyimpan..." : submitLabel}
       </Button>
     </form>

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { updatePackage } from "../../actions";
 import { PackageForm } from "../../package-form";
+import { ArrowLeft, Edit } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Edit Paket — Voyago Admin",
@@ -22,11 +23,32 @@ export default async function EditPackagePage({ params }: EditPackagePageProps) 
   }
 
   return (
-    <div>
-      <Link href="/admin/packages" className="text-sm text-muted-foreground hover:underline">
-        ← Kembali ke daftar paket
-      </Link>
-      <h1 className="mt-4 text-2xl font-semibold tracking-tight">Edit Paket</h1>
+    <div className="space-y-8">
+      {/* NAVIGATION BACK */}
+      <div>
+        <Link
+          href="/admin/packages"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-indigo-600 transition-colors group"
+        >
+          <ArrowLeft className="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" />
+          Kembali ke daftar paket
+        </Link>
+      </div>
+
+      {/* HEADER */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Edit className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+            Edit Paket
+          </h1>
+        </div>
+        <p className="text-slate-600 dark:text-slate-300">
+          Ubah informasi paket "{pkg.name}"
+        </p>
+      </div>
+
+      {/* FORM */}
       <PackageForm
         action={updatePackage.bind(null, pkg.id)}
         defaultValues={{

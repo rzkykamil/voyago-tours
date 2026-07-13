@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createPackage } from "../actions";
 import { PackageForm } from "../package-form";
+import { ArrowLeft, Plus } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Tambah Paket — Voyago Admin",
@@ -9,11 +10,32 @@ export const metadata: Metadata = {
 
 export default function NewPackagePage() {
   return (
-    <div>
-      <Link href="/admin/packages" className="text-sm text-muted-foreground hover:underline">
-        ← Kembali ke daftar paket
-      </Link>
-      <h1 className="mt-4 text-2xl font-semibold tracking-tight">Tambah Paket</h1>
+    <div className="space-y-8">
+      {/* NAVIGATION BACK */}
+      <div>
+        <Link
+          href="/admin/packages"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-indigo-600 transition-colors group"
+        >
+          <ArrowLeft className="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" />
+          Kembali ke daftar paket
+        </Link>
+      </div>
+
+      {/* HEADER */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Plus className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+            Tambah Paket Baru
+          </h1>
+        </div>
+        <p className="text-slate-600 dark:text-slate-300">
+          Buat paket tour baru untuk katalog Voyago Tours
+        </p>
+      </div>
+
+      {/* FORM */}
       <PackageForm action={createPackage} submitLabel="Buat Paket" />
     </div>
   );

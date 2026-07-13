@@ -11,6 +11,7 @@ import {
 import { formatCurrency, formatDate } from "@/lib/format";
 import { calculatePrice, nightsFromDuration } from "@/lib/pricing";
 import { prisma } from "@/lib/prisma";
+import { ArrowLeft, MapPin, Calendar, Car, User, Mail, Phone, Calculator } from "lucide-react";
 
 type TransactionPageProps = {
   params: Promise<{ bookingId: string }>;
@@ -67,88 +68,119 @@ export default async function TransactionPage({ params }: TransactionPageProps) 
   });
 
   return (
-    <div className="mx-auto w-full max-w-2xl px-6 py-16">
-      <Link href="/packages" className="text-sm text-muted-foreground hover:underline">
-        ← Kembali ke katalog
-      </Link>
-
-      <div className="mt-4 flex items-center justify-between">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Transaksi #{booking.id}
-        </h1>
-        <Badge variant={statusVariant[booking.status]}>
-          {statusLabel[booking.status]}
-        </Badge>
+    <div className="mx-auto w-full max-w-3xl px-6 py-12 sm:py-16 space-y-8">
+      {/* NAVIGATION BACK */}
+      <div>
+        <Link
+          href="/packages"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-indigo-600 transition-colors group"
+        >
+          <ArrowLeft className="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" />
+          Kembali ke katalog
+        </Link>
       </div>
-      <p className="mt-1 text-muted-foreground">
-        Dibuat pada {formatDate(booking.createdAt)}
-      </p>
 
-      <Card className="mt-8">
-        <CardHeader>
-          <CardTitle>{pkg.name}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-1 text-sm">
-          <p className="text-muted-foreground">
-            {formatDate(schedule.departureDate)} · {vehicle.name}
-          </p>
-          <p className="text-muted-foreground">{pkg.destination}</p>
-        </CardContent>
-      </Card>
+      {/* HEADER INFO */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+              Transaksi #{booking.id}
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Dibuat pada {formatDate(booking.createdAt)}
+            </p>
+          </div>
+          <Badge variant={statusVariant[booking.status]} className="w-fit text-sm py-2 px-4">
+            {statusLabel[booking.status]}
+          </Badge>
+        </div>
+      </div>
 
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitle>Data Pemesan</CardTitle>
+      {/* PAKET INFO */}
+      <Card className="overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border-slate-200/80 dark:border-slate-800">
+        <CardHeader className="border-b border-slate-100 dark:border-slate-800/60">
+          <CardTitle className="text-lg font-bold text-slate-800 dark:text-slate-100">{pkg.name}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2 text-sm">
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Nama</span>
-            <span>{booking.customerName}</span>
+        <CardContent className="pt-6 space-y-3">
+          <div className="flex items-center gap-2.5 text-sm">
+            <Calendar className="h-4 w-4 text-indigo-500 shrink-0" />
+            <span className="text-slate-600 dark:text-slate-300">
+              {formatDate(schedule.departureDate)} • {vehicle.name}
+            </span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Email</span>
-            <span>{booking.customerEmail}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">No. telepon</span>
-            <span>{booking.customerPhone}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Jumlah peserta</span>
-            <span>{booking.participantCount} orang</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Opsi hotel</span>
-            <span>{hotelOption.name}</span>
+          <div className="flex items-center gap-2.5 text-sm">
+            <MapPin className="h-4 w-4 text-indigo-500 shrink-0" />
+            <span className="text-slate-600 dark:text-slate-300">{pkg.destination}</span>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitle>Rincian Harga</CardTitle>
+      {/* DATA PEMESAN */}
+      <Card className="overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border-slate-200/80 dark:border-slate-800">
+        <CardHeader className="border-b border-slate-100 dark:border-slate-800/60 flex flex-row items-center gap-2">
+          <User className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+          <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">Data Pemesan</CardTitle>
         </CardHeader>
-        <CardContent>
-          <dl className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <dt className="text-muted-foreground">
+        <CardContent className="pt-6">
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between items-center pb-2">
+              <span className="text-slate-600 dark:text-slate-400 font-medium">Nama</span>
+              <span className="text-slate-900 dark:text-slate-50 font-semibold">{booking.customerName}</span>
+            </div>
+            <div className="flex justify-between items-center pb-2">
+              <span className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-medium">
+                <Mail className="h-3.5 w-3.5" />
+                Email
+              </span>
+              <span className="text-slate-900 dark:text-slate-50 font-semibold text-right break-all">{booking.customerEmail}</span>
+            </div>
+            <div className="flex justify-between items-center pb-2">
+              <span className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-medium">
+                <Phone className="h-3.5 w-3.5" />
+                Telepon
+              </span>
+              <span className="text-slate-900 dark:text-slate-50 font-semibold">{booking.customerPhone}</span>
+            </div>
+            <div className="flex justify-between items-center pb-2">
+              <span className="text-slate-600 dark:text-slate-400 font-medium">Jumlah peserta</span>
+              <span className="text-slate-900 dark:text-slate-50 font-semibold">{booking.participantCount} orang</span>
+            </div>
+            <div className="flex justify-between items-center pt-2 border-t border-slate-100 dark:border-slate-800">
+              <span className="text-slate-600 dark:text-slate-400 font-medium">Opsi hotel</span>
+              <span className="text-slate-900 dark:text-slate-50 font-semibold">{hotelOption.name}</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* RINCIAN HARGA */}
+      <Card className="overflow-hidden bg-gradient-to-br from-indigo-50/40 to-sky-50/40 dark:from-indigo-950/20 dark:to-slate-900/40 border-indigo-100/50 dark:border-indigo-900/30">
+        <CardHeader className="border-b border-indigo-100/50 dark:border-indigo-900/30 flex flex-row items-center gap-2">
+          <Calculator className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+          <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">Rincian Harga</CardTitle>
+        </CardHeader>
+        <CardContent className="pt-6">
+          <dl className="space-y-3 text-sm">
+            <div className="flex justify-between items-center pb-2">
+              <dt className="text-slate-600 dark:text-slate-400">
                 Hotel ({nights} malam × {booking.participantCount} orang)
               </dt>
-              <dd>{formatCurrency(breakdown.hotelTotal)}</dd>
+              <dd className="font-semibold text-slate-800 dark:text-slate-100">{formatCurrency(breakdown.hotelTotal)}</dd>
             </div>
-            <div className="flex justify-between">
-              <dt className="text-muted-foreground">
+            <div className="flex justify-between items-center pb-2">
+              <dt className="text-slate-600 dark:text-slate-400">
                 Aktivitas ({booking.participantCount} orang)
               </dt>
-              <dd>{formatCurrency(breakdown.activitiesTotal)}</dd>
+              <dd className="font-semibold text-slate-800 dark:text-slate-100">{formatCurrency(breakdown.activitiesTotal)}</dd>
             </div>
-            <div className="flex justify-between">
-              <dt className="text-muted-foreground">Kendaraan (per trip)</dt>
-              <dd>{formatCurrency(breakdown.vehicleTotal)}</dd>
+            <div className="flex justify-between items-center pb-2">
+              <dt className="text-slate-600 dark:text-slate-400">Kendaraan (per trip)</dt>
+              <dd className="font-semibold text-slate-800 dark:text-slate-100">{formatCurrency(breakdown.vehicleTotal)}</dd>
             </div>
-            <div className="flex justify-between border-t pt-2 font-semibold">
-              <dt>Total Dibayar</dt>
-              <dd>{formatCurrency(booking.totalPrice)}</dd>
+            <div className="flex justify-between items-center border-t border-indigo-200/50 dark:border-indigo-900/50 pt-3 font-bold">
+              <dt className="text-slate-800 dark:text-slate-100">Total Dibayar</dt>
+              <dd className="text-lg text-indigo-600 dark:text-indigo-400">{formatCurrency(booking.totalPrice)}</dd>
             </div>
           </dl>
         </CardContent>
