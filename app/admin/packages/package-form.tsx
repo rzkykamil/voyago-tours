@@ -49,7 +49,7 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="slug" className="flex items-center gap-2 text-card-foreground font-medium">
-              <LinkIcon className="h-4 w-4 text-slate-400" />
+              <LinkIcon className="h-4 w-4 text-muted-foreground" />
               Slug
             </Label>
             <Input
@@ -66,7 +66,7 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-1.5">
             <Label htmlFor="destination" className="flex items-center gap-2 text-card-foreground font-medium">
-              <MapPin className="h-4 w-4 text-slate-400" />
+              <MapPin className="h-4 w-4 text-muted-foreground" />
               Destinasi
             </Label>
             <Input
@@ -80,7 +80,7 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="durationDays" className="flex items-center gap-2 text-card-foreground font-medium">
-              <Clock className="h-4 w-4 text-slate-400" />
+              <Clock className="h-4 w-4 text-muted-foreground" />
               Durasi (hari)
             </Label>
             <Input

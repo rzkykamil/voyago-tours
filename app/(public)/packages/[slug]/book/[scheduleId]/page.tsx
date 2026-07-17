@@ -65,7 +65,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
             {formatDate(schedule.departureDate)}
           </Badge>
           <Badge variant="outline" className="flex items-center gap-1 border-slate-200 dark:border-slate-800 text-muted-foreground px-2.5 py-1 text-xs font-medium rounded-md">
-            <Car className="h-3.5 w-3.5 text-slate-500" />
+            <Car className="h-3.5 w-3.5 text-muted-foreground" />
             {schedule.vehicle.name}
           </Badge>
         </div>

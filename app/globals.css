@@ -58,24 +58,24 @@
   --color-void: #B23A2E;
   --color-graphite: #232427;
 
-  --background: var(--color-basalt);
-  --foreground: var(--color-kraft);
-  --card: var(--color-kraft);
+  --background: var(--color-kraft);
+  --foreground: var(--color-manifest-ink);
+  --card: #FFFFFF;
   --card-foreground: var(--color-manifest-ink);
-  --popover: var(--color-graphite);
-  --popover-foreground: var(--color-kraft);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--color-manifest-ink);
   --primary: var(--color-ember);
-  --primary-foreground: var(--color-manifest-ink);
+  --primary-foreground: var(--color-kraft);
   --secondary: var(--color-bluefire);
-  --secondary-foreground: var(--color-basalt);
-  --muted: var(--color-graphite);
-  --muted-foreground: color-mix(in oklch, var(--color-kraft), transparent 35%);
-  --accent: color-mix(in oklch, var(--color-ember), transparent 85%);
-  --accent-foreground: var(--color-kraft);
+  --secondary-foreground: var(--color-kraft);
+  --muted: color-mix(in oklch, var(--color-manifest-ink), var(--color-kraft) 90%);
+  --muted-foreground: color-mix(in oklch, var(--color-manifest-ink), transparent 35%);
+  --accent: color-mix(in oklch, var(--color-ember), transparent 88%);
+  --accent-foreground: var(--color-manifest-ink);
   --destructive: var(--color-void);
   --destructive-foreground: var(--color-kraft);
-  --border: color-mix(in oklch, var(--color-kraft), transparent 85%);
-  --input: color-mix(in oklch, var(--color-kraft), transparent 80%);
+  --border: color-mix(in oklch, var(--color-manifest-ink), transparent 85%);
+  --input: color-mix(in oklch, var(--color-manifest-ink), transparent 80%);
   --ring: var(--color-ember);
   --chart-1: var(--color-ember);
   --chart-2: var(--color-bluefire);
@@ -83,13 +83,13 @@
   --chart-4: var(--color-graphite);
   --chart-5: var(--color-basalt);
   --radius: 0.3rem;
-  --sidebar: var(--color-kraft);
+  --sidebar: #FFFFFF;
   --sidebar-foreground: var(--color-manifest-ink);
   --sidebar-primary: var(--color-ember);
   --sidebar-primary-foreground: var(--color-kraft);
   --sidebar-accent: var(--color-bluefire);
-  --sidebar-accent-foreground: var(--color-basalt);
-  --sidebar-border: color-mix(in oklch, var(--color-kraft), transparent 85%);
+  --sidebar-accent-foreground: var(--color-kraft);
+  --sidebar-border: color-mix(in oklch, var(--color-manifest-ink), transparent 85%);
   --sidebar-ring: var(--color-ember);
 }
 
@@ -126,6 +126,7 @@
   --chart-3: var(--color-void);
   --chart-4: var(--color-graphite);
   --chart-5: var(--color-basalt);
+  --radius: 0.3rem;
   --sidebar: var(--color-kraft);
   --sidebar-foreground: var(--color-manifest-ink);
   --sidebar-primary: var(--color-ember);

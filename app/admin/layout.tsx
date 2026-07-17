@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { logout } from "./login/actions";
 import { LayoutDashboard, DollarSign, Package, LogOut, Settings } from "lucide-react";
 
@@ -41,17 +42,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
           </nav>
 
-          <form action={logout}>
-            <Button
-              type="submit"
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-2"
-            >
-              <LogOut className="h-4 w-4" />
-              Keluar
-            </Button>
-          </form>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <form action={logout}>
+              <Button
+                type="submit"
+                variant="outline"
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Keluar
+              </Button>
+            </form>
+          </div>
         </div>
       </header>
 

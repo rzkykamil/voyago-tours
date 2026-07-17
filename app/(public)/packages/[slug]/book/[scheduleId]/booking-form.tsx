@@ -122,7 +122,7 @@ export function BookingForm({
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="customerEmail" className="flex items-center gap-2 text-card-foreground font-medium">
-              <Mail className="h-4 w-4 text-slate-400" />
+              <Mail className="h-4 w-4 text-muted-foreground" />
               Email
             </Label>
             <Input
@@ -135,7 +135,7 @@ export function BookingForm({
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="customerPhone" className="flex items-center gap-2 text-card-foreground font-medium">
-              <Phone className="h-4 w-4 text-slate-400" />
+              <Phone className="h-4 w-4 text-muted-foreground" />
               No. telepon
             </Label>
             <Input

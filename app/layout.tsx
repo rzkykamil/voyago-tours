@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -34,8 +35,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${bebasNeue.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

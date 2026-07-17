@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { Compass } from "lucide-react"; 
+import { Compass } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function PublicLayout({
   children,
@@ -27,20 +28,22 @@ export default function PublicLayout({
           </Link>
 
           {/* Menu Navigasi */}
-          <nav className="flex items-center gap-6 text-sm font-medium">
+          <nav className="flex items-center gap-6 text-sm font-medium ml-auto mr-2">
             <Link
               href="/packages"
               className="text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-primary after:transition-all"
             >
               Paket Tour
             </Link>
-            <Link 
-              href="/about" 
+            <Link
+              href="/about"
               className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
             >
               Tentang Kami
             </Link>
           </nav>
+
+          <ThemeToggle />
 
         </div>
       </header>
