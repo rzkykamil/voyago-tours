@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Reveal } from "@/components/reveal";
 import { prisma } from "@/lib/prisma";
 import { updateActivityPrice, updateHotelPrice, updateVehiclePrice } from "./actions";
 import { Home, Car, Sparkles } from "lucide-react";
@@ -29,17 +30,17 @@ export default async function AdminPricingPage() {
   return (
     <div className="space-y-10">
       {/* HEADER */}
-      <div className="space-y-2">
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-card-foreground">
+      <Reveal className="space-y-2">
+        <h1 className="text-3xl sm:text-4xl font-heading font-bold tracking-tight text-card-foreground">
           Kelola Harga
         </h1>
         <p className="text-muted-foreground">
           Perubahan harga langsung memengaruhi kalkulator harga di halaman booking.
         </p>
-      </div>
+      </Reveal>
 
       {/* HOTEL SECTION */}
-      <section className="space-y-4">
+      <Reveal className="space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
           <Home className="h-5 w-5 text-primary dark:text-primary" />
           <h2 className="text-lg font-bold text-card-foreground tracking-tight">Opsi Hotel</h2>
@@ -71,10 +72,10 @@ export default async function AdminPricingPage() {
             </Card>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* VEHICLE SECTION */}
-      <section className="space-y-4">
+      <Reveal className="space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
           <Car className="h-5 w-5 text-primary dark:text-primary" />
           <h2 className="text-lg font-bold text-card-foreground tracking-tight">Kendaraan</h2>
@@ -108,10 +109,10 @@ export default async function AdminPricingPage() {
             </Card>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* ACTIVITIES SECTION */}
-      <section className="space-y-4">
+      <Reveal className="space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
           <Sparkles className="h-5 w-5 text-primary dark:text-primary" />
           <h2 className="text-lg font-bold text-card-foreground tracking-tight">Aktivitas per Paket</h2>
@@ -150,7 +151,7 @@ export default async function AdminPricingPage() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

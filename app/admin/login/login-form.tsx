@@ -1,19 +1,21 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login, type LoginFormState } from "./actions";
+import { formatEmail } from "@/lib/format";
 import { Mail, Lock } from "lucide-react";
 
 const initialState: LoginFormState = {};
 
 export function LoginForm() {
+  const [email, setEmail] = useState("");
   const [state, formAction, isPending] = useActionState(login, initialState);
 
   return (
-    <form action={formAction} className="space-y-4 rounded-none overflow-hidden bg-card border border-border p-6">
+    <form action={formAction} className="space-y-4 rounded-lg overflow-hidden bg-card border border-border p-6">
       <div className="space-y-1.5">
         <Label htmlFor="email" className="flex items-center gap-2 text-card-foreground font-medium">
           <Mail className="h-4 w-4 text-muted-foreground" />
@@ -23,6 +25,8 @@ export function LoginForm() {
           id="email"
           name="email"
           type="email"
+          value={email}
+          onChange={(e) => setEmail(formatEmail(e.target.value))}
           placeholder="admin@voyago.tours"
           required
         />

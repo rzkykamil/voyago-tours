@@ -50,103 +50,109 @@
 }
 
 :root {
-  --color-basalt: #17181A;
-  --color-manifest-ink: #2B2620;
-  --color-kraft: #F3EDDD;
-  --color-ember: #D9791F;
-  --color-bluefire: #35AEBB;
-  --color-void: #B23A2E;
-  --color-graphite: #232427;
+  --color-ink: #0F1B2E;
+  --color-parchment: #EDE6D6;
+  --color-brass: #B07C33;
+  --color-pine: #2F5D53;
+  --color-rust: #A6432E;
+  --color-slate: #3A4150;
 
-  --background: var(--color-kraft);
-  --foreground: var(--color-manifest-ink);
-  --card: #FFFFFF;
-  --card-foreground: var(--color-manifest-ink);
-  --popover: #FFFFFF;
-  --popover-foreground: var(--color-manifest-ink);
-  --primary: var(--color-ember);
-  --primary-foreground: var(--color-kraft);
-  --secondary: var(--color-bluefire);
-  --secondary-foreground: var(--color-kraft);
-  --muted: color-mix(in oklch, var(--color-manifest-ink), var(--color-kraft) 90%);
-  --muted-foreground: color-mix(in oklch, var(--color-manifest-ink), transparent 35%);
-  --accent: color-mix(in oklch, var(--color-ember), transparent 88%);
-  --accent-foreground: var(--color-manifest-ink);
-  --destructive: var(--color-void);
-  --destructive-foreground: var(--color-kraft);
-  --border: color-mix(in oklch, var(--color-manifest-ink), transparent 85%);
-  --input: color-mix(in oklch, var(--color-manifest-ink), transparent 80%);
-  --ring: var(--color-ember);
-  --chart-1: var(--color-ember);
-  --chart-2: var(--color-bluefire);
-  --chart-3: var(--color-void);
-  --chart-4: var(--color-graphite);
-  --chart-5: var(--color-basalt);
-  --radius: 0.3rem;
-  --sidebar: #FFFFFF;
-  --sidebar-foreground: var(--color-manifest-ink);
-  --sidebar-primary: var(--color-ember);
-  --sidebar-primary-foreground: var(--color-kraft);
-  --sidebar-accent: var(--color-bluefire);
-  --sidebar-accent-foreground: var(--color-kraft);
-  --sidebar-border: color-mix(in oklch, var(--color-manifest-ink), transparent 85%);
-  --sidebar-ring: var(--color-ember);
+  --background: var(--color-parchment);
+  --foreground: var(--color-ink);
+  --card: #FBF8F0;
+  --card-foreground: var(--color-ink);
+  --popover: #FBF8F0;
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-brass);
+  --primary-foreground: #FBF8F0;
+  --secondary: var(--color-pine);
+  --secondary-foreground: #FBF8F0;
+  --muted: color-mix(in oklch, var(--color-ink), var(--color-parchment) 88%);
+  --muted-foreground: color-mix(in oklch, var(--color-ink), transparent 40%);
+  --accent: color-mix(in oklch, var(--color-brass), transparent 88%);
+  --accent-foreground: var(--color-ink);
+  --destructive: var(--color-rust);
+  --destructive-foreground: #FBF8F0;
+  --border: color-mix(in oklch, var(--color-ink), transparent 84%);
+  --input: color-mix(in oklch, var(--color-ink), transparent 78%);
+  --ring: var(--color-brass);
+  --chart-1: var(--color-brass);
+  --chart-2: var(--color-pine);
+  --chart-3: var(--color-rust);
+  --chart-4: var(--color-slate);
+  --chart-5: var(--color-ink);
+  --radius: 0.55rem;
+  --sidebar: #FBF8F0;
+  --sidebar-foreground: var(--color-ink);
+  --sidebar-primary: var(--color-brass);
+  --sidebar-primary-foreground: #FBF8F0;
+  --sidebar-accent: var(--color-pine);
+  --sidebar-accent-foreground: #FBF8F0;
+  --sidebar-border: color-mix(in oklch, var(--color-ink), transparent 84%);
+  --sidebar-ring: var(--color-brass);
 }
 
 .dark {
-  --color-basalt: #17181A;
-  --color-manifest-ink: #2B2620;
-  --color-kraft: #F3EDDD;
-  --color-ember: #D9791F;
-  --color-bluefire: #35AEBB;
-  --color-void: #B23A2E;
-  --color-graphite: #232427;
+  --color-ink: #0B1220;
+  --color-parchment: #EDE6D6;
+  --color-brass: #C99A4E;
+  --color-pine: #4B8A7C;
+  --color-rust: #C1584A;
+  --color-slate: #232B3D;
 
-  --background: var(--color-basalt);
-  --foreground: var(--color-kraft);
-  --card: var(--color-kraft);
-  --card-foreground: var(--color-manifest-ink);
-  --popover: var(--color-graphite);
-  --popover-foreground: var(--color-kraft);
-  --primary: var(--color-ember);
-  --primary-foreground: var(--color-manifest-ink);
-  --secondary: var(--color-bluefire);
-  --secondary-foreground: var(--color-basalt);
-  --muted: var(--color-graphite);
-  --muted-foreground: color-mix(in oklch, var(--color-kraft), transparent 35%);
-  --accent: color-mix(in oklch, var(--color-ember), transparent 85%);
-  --accent-foreground: var(--color-kraft);
-  --destructive: var(--color-void);
-  --destructive-foreground: var(--color-kraft);
-  --border: color-mix(in oklch, var(--color-kraft), transparent 85%);
-  --input: color-mix(in oklch, var(--color-kraft), transparent 80%);
-  --ring: var(--color-ember);
-  --chart-1: var(--color-ember);
-  --chart-2: var(--color-bluefire);
-  --chart-3: var(--color-void);
-  --chart-4: var(--color-graphite);
-  --chart-5: var(--color-basalt);
-  --radius: 0.3rem;
-  --sidebar: var(--color-kraft);
-  --sidebar-foreground: var(--color-manifest-ink);
-  --sidebar-primary: var(--color-ember);
-  --sidebar-primary-foreground: var(--color-kraft);
-  --sidebar-accent: var(--color-bluefire);
-  --sidebar-accent-foreground: var(--color-basalt);
-  --sidebar-border: color-mix(in oklch, var(--color-kraft), transparent 85%);
-  --sidebar-ring: var(--color-ember);
+  --background: var(--color-ink);
+  --foreground: var(--color-parchment);
+  --card: #131D30;
+  --card-foreground: var(--color-parchment);
+  --popover: #131D30;
+  --popover-foreground: var(--color-parchment);
+  --primary: var(--color-brass);
+  --primary-foreground: var(--color-ink);
+  --secondary: var(--color-pine);
+  --secondary-foreground: var(--color-ink);
+  --muted: var(--color-slate);
+  --muted-foreground: color-mix(in oklch, var(--color-parchment), transparent 38%);
+  --accent: color-mix(in oklch, var(--color-brass), transparent 85%);
+  --accent-foreground: var(--color-parchment);
+  --destructive: var(--color-rust);
+  --destructive-foreground: var(--color-ink);
+  --border: color-mix(in oklch, var(--color-parchment), transparent 87%);
+  --input: color-mix(in oklch, var(--color-parchment), transparent 80%);
+  --ring: var(--color-brass);
+  --chart-1: var(--color-brass);
+  --chart-2: var(--color-pine);
+  --chart-3: var(--color-rust);
+  --chart-4: color-mix(in oklch, var(--color-parchment), transparent 40%);
+  --chart-5: var(--color-parchment);
+  --radius: 0.55rem;
+  --sidebar: #131D30;
+  --sidebar-foreground: var(--color-parchment);
+  --sidebar-primary: var(--color-brass);
+  --sidebar-primary-foreground: var(--color-ink);
+  --sidebar-accent: var(--color-pine);
+  --sidebar-accent-foreground: var(--color-ink);
+  --sidebar-border: color-mix(in oklch, var(--color-parchment), transparent 87%);
+  --sidebar-ring: var(--color-brass);
 }
 
 @layer components {
-  .ticket-perforation {
+  .route-dashes {
     height: 1rem;
-    -webkit-mask-image: radial-gradient(circle 5px at 10px 8px, transparent 98%, black 100%);
-    mask-image: radial-gradient(circle 5px at 10px 8px, transparent 98%, black 100%);
+    -webkit-mask-image: radial-gradient(circle 2.5px at 10px 8px, transparent 98%, black 100%);
+    mask-image: radial-gradient(circle 2.5px at 10px 8px, transparent 98%, black 100%);
     -webkit-mask-repeat: repeat-x;
     mask-repeat: repeat-x;
     -webkit-mask-size: 20px 16px;
     mask-size: 20px 16px;
-    background: var(--card);
+    background: linear-gradient(to right, transparent, var(--color-pine) 15%, var(--color-pine) 85%, transparent);
+    opacity: 0.5;
+  }
+  .coordinate-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
   }
 }
 

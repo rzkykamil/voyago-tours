@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Reveal } from "@/components/reveal";
 import { LoginForm } from "./login-form";
 import { Lock } from "lucide-react";
 
@@ -10,7 +11,7 @@ export default function AdminLoginPage() {
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-background antialiased">
 
-      <div className="relative z-10 w-full max-w-sm px-6">
+      <Reveal className="relative z-10 w-full max-w-sm px-6">
         {/* HEADER SECTION */}
         <div className="space-y-6 text-center mb-8">
           <div className="flex justify-center">
@@ -36,7 +37,7 @@ export default function AdminLoginPage() {
         <p className="mt-6 text-center text-xs text-muted-foreground">
           Akses terbatas untuk admin Voyago Tours
         </p>
-      </div>
+      </Reveal>
     </div>
   );
 }

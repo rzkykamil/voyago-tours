@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Reveal, RevealStagger, RevealItem } from "@/components/reveal";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 import { Users, TrendingUp, Clock, CheckCircle, XCircle } from "lucide-react";
@@ -60,18 +61,19 @@ export default async function AdminDashboardPage() {
   return (
     <div className="space-y-8">
       {/* HEADER */}
-      <div className="space-y-2">
+      <Reveal className="space-y-2">
         <h1 className="text-3xl sm:text-4xl font-heading font-bold tracking-tight text-card-foreground">
           Dashboard Admin
         </h1>
         <p className="text-muted-foreground">
           Pantau ringkasan booking dan pendapatan Voyago Tours
         </p>
-      </div>
+      </Reveal>
 
       {/* STAT CARDS */}
-      <div className="grid gap-4 sm:grid-cols-2">
+      <RevealStagger className="grid gap-4 sm:grid-cols-2">
         {/* Total Booking */}
+        <RevealItem>
         <Card className="overflow-hidden bg-card border-border hover:shadow-lg transition-shadow">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
@@ -95,8 +97,10 @@ export default async function AdminDashboardPage() {
             </div>
           </CardContent>
         </Card>
+        </RevealItem>
 
         {/* Total Pendapatan */}
+        <RevealItem>
         <Card className="overflow-hidden bg-card border-border hover:shadow-lg transition-shadow">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
@@ -115,10 +119,11 @@ export default async function AdminDashboardPage() {
             </p>
           </CardContent>
         </Card>
-      </div>
+        </RevealItem>
+      </RevealStagger>
 
       {/* BOOKING TERBARU */}
-      <div className="space-y-4">
+      <Reveal className="space-y-4">
         <div className="flex items-center gap-2">
           <Clock className="h-5 w-5 text-primary" />
           <h2 className="text-lg font-bold text-card-foreground tracking-tight">
@@ -126,16 +131,16 @@ export default async function AdminDashboardPage() {
           </h2>
         </div>
 
-        <div className="rounded-none overflow-hidden border border-border bg-card">
+        <div className="rounded-lg overflow-hidden border border-border bg-card">
           <Table>
             <TableHeader className="bg-muted/50 border-b border-border">
               <TableRow className="hover:bg-transparent">
-                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">ID</TableHead>
-                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Pemesan</TableHead>
-                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Paket</TableHead>
-                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Tanggal</TableHead>
-                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Total</TableHead>
-                <TableHead className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Status</TableHead>
+                <TableHead className="coordinate-label">ID</TableHead>
+                <TableHead className="coordinate-label">Pemesan</TableHead>
+                <TableHead className="coordinate-label">Paket</TableHead>
+                <TableHead className="coordinate-label">Tanggal</TableHead>
+                <TableHead className="coordinate-label">Total</TableHead>
+                <TableHead className="coordinate-label">Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -186,7 +191,7 @@ export default async function AdminDashboardPage() {
             </TableBody>
           </Table>
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

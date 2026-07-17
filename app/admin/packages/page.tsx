@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Reveal } from "@/components/reveal";
 import { prisma } from "@/lib/prisma";
 import { DeletePackageButton } from "./delete-package-button";
 import { Plus, Package, Clock, MapPin, Zap } from "lucide-react";
@@ -30,10 +31,10 @@ export default async function AdminPackagesPage() {
   return (
     <div className="space-y-6">
       {/* HEADER */}
-      <div className="space-y-4">
+      <Reveal className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-card-foreground">
+            <h1 className="text-3xl sm:text-4xl font-heading font-bold tracking-tight text-card-foreground">
               Kelola Paket
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
@@ -42,16 +43,17 @@ export default async function AdminPackagesPage() {
           </div>
           <Button
             render={<Link href="/admin/packages/new" />}
+            nativeButton={false}
             className="bg-primary hover:bg-primary text-white font-semibold flex items-center gap-2 w-fit"
           >
             <Plus className="h-4 w-4" />
             Tambah Paket
           </Button>
         </div>
-      </div>
+      </Reveal>
 
       {/* TABLE */}
-      <div className="rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm">
+      <Reveal className="rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm">
         <Table>
           <TableHeader className="bg-slate-50/50 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800">
             <TableRow className="hover:bg-transparent">
@@ -113,6 +115,7 @@ export default async function AdminPackagesPage() {
                     variant="outline"
                     size="sm"
                     render={<Link href={`/admin/packages/${pkg.id}/edit`} />}
+                    nativeButton={false}
                     className="border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-900"
                   >
                     Edit
@@ -135,7 +138,7 @@ export default async function AdminPackagesPage() {
             )}
           </TableBody>
         </Table>
-      </div>
+      </Reveal>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Reveal } from "@/components/reveal";
 import type { PackageFormState } from "./actions";
 import { Package, MapPin, Clock, Link as LinkIcon, FileText } from "lucide-react";
 
@@ -27,7 +28,8 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
   const [state, formAction, isPending] = useActionState(action, initialState);
 
   return (
-    <form action={formAction} className="mt-6 space-y-6 max-w-2xl">
+    <Reveal className="mt-6">
+    <form action={formAction} className="space-y-6 max-w-2xl">
       {/* SECTION 1: BASIC INFO */}
       <div className="space-y-4 rounded-xl overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 p-6">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
@@ -145,5 +147,6 @@ export function PackageForm({ action, defaultValues, submitLabel }: PackageFormP
         {isPending ? "Menyimpan..." : submitLabel}
       </Button>
     </form>
+    </Reveal>
   );
 }

@@ -8,7 +8,7 @@ function TicketCard({
   return (
     <div
       className={cn(
-        "flex flex-col rounded-none bg-card text-card-foreground ring-1 ring-card-foreground/10 overflow-hidden shadow-[0_10px_30px_-12px_rgba(0,0,0,0.55)] hover:-rotate-[0.3deg] hover:-translate-y-0.5 transition-all duration-300",
+        "flex flex-col rounded-lg bg-card text-card-foreground ring-1 ring-card-foreground/10 overflow-hidden shadow-[0_10px_30px_-14px_rgba(0,0,0,0.45)] hover:ring-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_36px_-16px_rgba(0,0,0,0.5)] transition-all duration-300",
         className
       )}
       {...props}
@@ -105,7 +105,7 @@ function TicketCardPerforation({
   return (
     <div
       className={cn(
-        "ticket-perforation border-t-2 border-dashed border-card-foreground/20",
+        "route-dashes border-t border-dashed border-card-foreground/15",
         className
       )}
       {...props}

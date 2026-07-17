@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/reveal";
 import { formatDate } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 import { ArrowLeft, MapPin, Calendar, Car } from "lucide-react";
@@ -58,7 +59,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
       </div>
 
       {/* HEADER INFO */}
-      <div className="space-y-4">
+      <Reveal className="space-y-4">
         <div className="flex flex-wrap gap-2.5 items-center">
           <Badge variant="secondary" className="flex items-center gap-1 bg-primary/10 dark:bg-primary/20/40 text-primary dark:text-primary border border-primary-100 dark:border-primary-900/50 px-2.5 py-1 text-xs font-semibold rounded-md">
             <Calendar className="h-3.5 w-3.5" />
@@ -70,7 +71,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
           </Badge>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-card-foreground leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-heading font-bold tracking-tight text-card-foreground leading-tight">
           {schedule.package.name}
         </h1>
 
@@ -78,27 +79,29 @@ export default async function BookingPage({ params }: BookingPageProps) {
           <MapPin className="h-4 w-4 text-primary shrink-0" />
           {schedule.package.destination}
         </p>
-      </div>
+      </Reveal>
 
       {/* BOOKING SECTION */}
       {seatsRemaining <= 0 ? (
-        <div className="flex items-start gap-3 rounded-xl bg-destructive-50 dark:bg-destructive-950/20 border border-destructive-200 dark:border-destructive-900/40 p-4">
+        <Reveal className="flex items-start gap-3 rounded-xl bg-destructive-50 dark:bg-destructive-950/20 border border-destructive-200 dark:border-destructive-900/40 p-4">
           <div className="flex-1">
             <Badge variant="destructive" className="mb-2">Kuota Penuh</Badge>
             <p className="text-sm text-destructive-700 dark:text-destructive-300 font-medium">
               Kuota jadwal keberangkatan ini sudah penuh. Silakan pilih jadwal lain dari detail paket.
             </p>
           </div>
-        </div>
+        </Reveal>
       ) : (
-        <BookingForm
-          scheduleId={schedule.id}
-          durationDays={schedule.package.durationDays}
-          vehiclePricePerTrip={schedule.vehicle.pricePerTrip}
-          activityPrices={schedule.package.activities.map((activity) => activity.pricePerPerson)}
-          hotelOptions={hotelOptions}
-          seatsRemaining={seatsRemaining}
-        />
+        <Reveal delay={0.1}>
+          <BookingForm
+            scheduleId={schedule.id}
+            durationDays={schedule.package.durationDays}
+            vehiclePricePerTrip={schedule.vehicle.pricePerTrip}
+            activityPrices={schedule.package.activities.map((activity) => activity.pricePerPerson)}
+            hotelOptions={hotelOptions}
+            seatsRemaining={seatsRemaining}
+          />
+        </Reveal>
       )}
     </div>
   );

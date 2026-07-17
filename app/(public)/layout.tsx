@@ -9,14 +9,10 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    // Membungkus seluruh halaman agar memiliki struktur flex vertikal yang kokoh
     <div className="relative min-h-screen flex flex-col bg-background antialiased selection:bg-primary selection:text-primary-foreground">
 
-      {/* 1. HEADER (NAVBAR STICKY WITH BLUR) */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md transition-all">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-6 py-4">
-          
-          {/* Logo dengan Ikon */}
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-6 py-4">          
           <Link
             href="/"
             className="flex items-center gap-2.5 font-bold text-lg tracking-tight hover:opacity-90 transition-opacity"

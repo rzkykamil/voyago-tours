@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createPackage } from "../actions";
 import { PackageForm } from "../package-form";
+import { Reveal } from "@/components/reveal";
 import { ArrowLeft, Plus } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -23,17 +24,17 @@ export default function NewPackagePage() {
       </div>
 
       {/* HEADER */}
-      <div className="space-y-2">
+      <Reveal className="space-y-2">
         <div className="flex items-center gap-2">
           <Plus className="h-6 w-6 text-primary dark:text-primary" />
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-card-foreground">
+          <h1 className="text-3xl sm:text-4xl font-heading font-bold tracking-tight text-card-foreground">
             Tambah Paket Baru
           </h1>
         </div>
         <p className="text-muted-foreground">
           Buat paket tour baru untuk katalog Voyago Tours
         </p>
-      </div>
+      </Reveal>
 
       {/* FORM */}
       <PackageForm action={createPackage} submitLabel="Buat Paket" />

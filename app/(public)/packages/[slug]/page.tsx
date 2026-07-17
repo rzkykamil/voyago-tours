@@ -13,18 +13,14 @@ import {
   TicketCardStub,
 } from "@/components/ticket-card";
 import { StampBadge } from "@/components/stamp-badge";
+import { Reveal, RevealStagger, RevealItem } from "@/components/reveal";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
-// Import ikon untuk memperkuat visualisasi detail informasi
-import { 
-  ArrowLeft, 
-  MapPin, 
-  Clock, 
-  Check, 
-  Calendar, 
-  Car, 
-  Users, 
-  TicketPercent 
+import {
+  ArrowLeft,
+  Check,
+  Calendar,
+  TicketPercent
 } from "lucide-react";
 
 type PackagePageProps = {
@@ -83,8 +79,8 @@ export default async function PackageDetailPage({ params }: PackagePageProps) {
       </div>
 
       {/* 2. HERO / HEADER INFO */}
-      <div className="space-y-4">
-        <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+      <Reveal className="space-y-4">
+        <div className="coordinate-label">
           {pkg.destination} — {pkg.durationDays} Hari
         </div>
 
@@ -95,7 +91,7 @@ export default async function PackageDetailPage({ params }: PackagePageProps) {
         <p className="text-card-foreground text-base sm:text-lg leading-relaxed pt-2 border-l-4 border-primary pl-4">
           {pkg.description}
         </p>
-      </div>
+      </Reveal>
 
       {/* 3. ACTIVITIES SECTION */}
       <section className="space-y-4">
@@ -106,9 +102,9 @@ export default async function PackageDetailPage({ params }: PackagePageProps) {
           </h2>
         </div>
 
-        <div className="space-y-2 rounded-none bg-card ring-1 ring-card-foreground/10">
+        <RevealStagger className="space-y-2 rounded-lg bg-card ring-1 ring-card-foreground/10">
           {pkg.activities.map((activity) => (
-            <div
+            <RevealItem
               key={activity.id}
               className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-5 py-3 text-sm border-b border-card-foreground/5 last:border-b-0 hover:bg-card-foreground/2 transition-colors"
             >
@@ -121,9 +117,9 @@ export default async function PackageDetailPage({ params }: PackagePageProps) {
               <span className="font-mono text-xs uppercase tracking-widest text-primary">
                 {formatCurrency(activity.pricePerPerson)} <span className="text-muted-foreground font-normal">/ orang</span>
               </span>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealStagger>
       </section>
 
       {/* 4. SCHEDULES SECTION */}
@@ -135,61 +131,63 @@ export default async function PackageDetailPage({ params }: PackagePageProps) {
           </h2>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <RevealStagger className="grid gap-4 sm:grid-cols-2">
           {pkg.schedules.map((schedule) => {
             const seatsRemaining = schedule.vehicle.capacity - schedule.seatsBooked;
             const isFull = seatsRemaining <= 0;
 
             return (
-              <TicketCard key={schedule.id} className={isFull ? "opacity-60" : ""}>
-                <TicketCardHeader>
-                  <TicketCardMeta>{schedule.vehicle.name}</TicketCardMeta>
-                  <TicketCardHeading>{formatDate(schedule.departureDate)}</TicketCardHeading>
-                </TicketCardHeader>
+              <RevealItem key={schedule.id}>
+                <TicketCard className={isFull ? "opacity-60" : ""}>
+                  <TicketCardHeader>
+                    <TicketCardMeta>{schedule.vehicle.name}</TicketCardMeta>
+                    <TicketCardHeading>{formatDate(schedule.departureDate)}</TicketCardHeading>
+                  </TicketCardHeader>
 
-                <TicketCardBody>
-                  <TicketCardRow
-                    label="Kapasitas"
-                    value={`${schedule.seatsBooked}/${schedule.vehicle.capacity}`}
-                  />
-                  <TicketCardRow
-                    label="Sisa"
-                    value={isFull ? "0" : `${seatsRemaining}`}
-                  />
-                </TicketCardBody>
+                  <TicketCardBody>
+                    <TicketCardRow
+                      label="Kapasitas"
+                      value={`${schedule.seatsBooked}/${schedule.vehicle.capacity}`}
+                    />
+                    <TicketCardRow
+                      label="Sisa"
+                      value={isFull ? "0" : `${seatsRemaining}`}
+                    />
+                  </TicketCardBody>
 
-                <TicketCardPerforation />
+                  <TicketCardPerforation />
 
-                <TicketCardStub className="flex items-center justify-between">
-                  <StampBadge
-                    variant={isFull ? "cancelled" : "available"}
-                    size="sm"
-                  >
-                    {isFull ? "PENUH" : "BUKA"}
-                  </StampBadge>
-                  {isFull ? (
-                    <Button size="sm" variant="ghost" disabled>
-                      Penuh
-                    </Button>
-                  ) : (
-                    <Link href={`/packages/${pkg.slug}/book/${schedule.id}`}>
-                      <Button
-                        size="sm"
-                        variant="stamp"
-                        type="button"
-                      >
-                        Pesan
+                  <TicketCardStub className="flex items-center justify-between">
+                    <StampBadge
+                      variant={isFull ? "cancelled" : "available"}
+                      size="sm"
+                    >
+                      {isFull ? "PENUH" : "BUKA"}
+                    </StampBadge>
+                    {isFull ? (
+                      <Button size="sm" variant="ghost" disabled>
+                        Penuh
                       </Button>
-                    </Link>
-                  )}
-                </TicketCardStub>
-              </TicketCard>
+                    ) : (
+                      <Link href={`/packages/${pkg.slug}/book/${schedule.id}`}>
+                        <Button
+                          size="sm"
+                          variant="stamp"
+                          type="button"
+                        >
+                          Pesan
+                        </Button>
+                      </Link>
+                    )}
+                  </TicketCardStub>
+                </TicketCard>
+              </RevealItem>
             );
           })}
-        </div>
+        </RevealStagger>
 
         {pkg.schedules.length === 0 && (
-          <div className="text-center py-8 rounded-none border border-dashed border-border bg-card">
+          <div className="text-center py-8 rounded-lg border border-dashed border-border bg-card">
             <p className="text-sm text-muted-foreground font-medium">
               Belum ada jadwal keberangkatan untuk paket ini.
             </p>

@@ -10,11 +10,11 @@ import {
   TicketCardPerforation,
   TicketCardStub,
 } from "@/components/ticket-card";
-import { StampBadge } from "@/components/stamp-badge";
 import { Button } from "@/components/ui/button";
+import { Reveal, RevealStagger, RevealItem } from "@/components/reveal";
 import { formatDate } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
-import { Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Paket Tour — Voyago Tours",
@@ -34,8 +34,8 @@ export default async function PackagesPage() {
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-24">
       {/* HEADER HALAMAN */}
-      <div className="space-y-3 mb-12">
-        <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+      <Reveal className="space-y-3 mb-12">
+        <div className="coordinate-label">
           Voyago Tours — Katalog Destinasi
         </div>
         <h1 className="text-3xl sm:text-4xl font-heading font-bold tracking-tight text-card-foreground">
@@ -44,17 +44,18 @@ export default async function PackagesPage() {
         <p className="max-w-2xl text-md text-muted-foreground leading-relaxed">
           Pilih destinasi impianmu bersama Voyago Tours. Temukan petualangan menarik dengan akomodasi dan jadwal terbaik.
         </p>
-      </div>
+      </Reveal>
 
       {/* GRID KARTU PAKET */}
-      <div className="grid gap-6 sm:grid-cols-2">
+      <RevealStagger className="grid gap-6 sm:grid-cols-2">
         {packages.map((pkg) => {
           const nextSchedule = pkg.schedules.find(
             (schedule) => schedule.departureDate >= now
           );
 
           return (
-            <TicketCard key={pkg.id}>
+            <RevealItem key={pkg.id}>
+            <TicketCard>
               <TicketCardHeader>
                 <TicketCardMeta>{pkg.destination}</TicketCardMeta>
                 <TicketCardHeading>{pkg.name}</TicketCardHeading>
@@ -92,9 +93,10 @@ export default async function PackagesPage() {
                 </Link>
               </TicketCardStub>
             </TicketCard>
+            </RevealItem>
           );
         })}
-      </div>
+      </RevealStagger>
     </div>
   );
 }

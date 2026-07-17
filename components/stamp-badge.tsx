@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const stampBadgeVariants = cva(
-  "inline-flex items-center justify-center aspect-square rounded-full border-2 border-dashed font-mono text-xs font-semibold uppercase tracking-wider shrink-0 -rotate-6",
+  "inline-flex items-center justify-center aspect-square rounded-full border border-dashed font-mono text-xs font-semibold uppercase tracking-wider shrink-0 -rotate-3",
   {
     variants: {
       variant: {

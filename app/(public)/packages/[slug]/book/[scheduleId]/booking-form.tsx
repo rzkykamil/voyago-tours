@@ -4,7 +4,15 @@ import { useActionState, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { formatCurrency } from "@/lib/format";
+import { Reveal } from "@/components/reveal";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { formatCurrency, formatPhoneNumber, formatEmail, formatName, validateEmail, validatePhoneNumber } from "@/lib/format";
 import { calculatePrice, nightsFromDuration } from "@/lib/pricing";
 import { createBooking, type BookingFormState } from "./actions";
 import { Users, Mail, Phone, User, Home, Calculator } from "lucide-react";
@@ -36,6 +44,9 @@ export function BookingForm({
 }: BookingFormProps) {
   const [hotelOptionId, setHotelOptionId] = useState(hotelOptions[0]?.id ?? 0);
   const [participantCount, setParticipantCount] = useState(1);
+  const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
   const [state, formAction, isPending] = useActionState(
     createBooking.bind(null, scheduleId),
     initialState
@@ -57,9 +68,9 @@ export function BookingForm({
   return (
     <form action={formAction} className="space-y-6">
       {/* SECTION 1: PESERTA & HOTEL */}
-      <div className="space-y-4 rounded-xl overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 p-6">
-        <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
-          <Users className="h-5 w-5 text-primary dark:text-primary" />
+      <Reveal className="space-y-4 rounded-lg overflow-hidden bg-card/60 backdrop-blur-sm border border-border p-6">
+        <div className="flex items-center gap-2 border-b border-border pb-3 mb-4">
+          <Users className="h-5 w-5 text-primary" />
           <h3 className="text-sm font-bold text-card-foreground tracking-tight">Peserta & Akomodasi</h3>
         </div>
 
@@ -73,10 +84,10 @@ export function BookingForm({
             max={seatsRemaining}
             value={participantCount}
             onChange={(event) => setParticipantCount(Number(event.target.value))}
-            className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+            className="border-border bg-background"
             required
           />
-          <p className="text-xs text-primary dark:text-primary font-medium">
+          <p className="text-xs text-primary font-medium">
             ✓ Sisa kursi tersedia: <strong>{seatsRemaining}</strong> kursi
           </p>
         </div>
@@ -86,27 +97,36 @@ export function BookingForm({
             <Home className="h-4 w-4 text-primary" />
             Pilih opsi hotel
           </Label>
-          <select
-            id="hotelOptionId"
-            name="hotelOptionId"
-            value={hotelOptionId}
-            onChange={(event) => setHotelOptionId(Number(event.target.value))}
-            className="h-10 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-3 text-sm outline-none focus-visible:border-primary-400 focus-visible:ring-2 focus-visible:ring-indigo-400/50"
-            required
-          >
-            {hotelOptions.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name} — {formatCurrency(option.pricePerPersonPerNight)} / orang / malam
-              </option>
-            ))}
-          </select>
+          <Select value={hotelOptionId.toString()} onValueChange={(value) => setHotelOptionId(Number(value))}>
+            <SelectTrigger id="hotelOptionId" className="border-border bg-background w-full">
+              {hotelOptionId ? (
+                <div className="flex items-center gap-2">
+                  <span className="font-medium">{selectedHotel?.name}</span>
+                  <span className="text-sm text-muted-foreground">• {formatCurrency(selectedHotel?.pricePerPersonPerNight ?? 0)}/malam</span>
+                </div>
+              ) : (
+                <span className="text-muted-foreground">Pilih hotel...</span>
+              )}
+            </SelectTrigger>
+            <SelectContent className="w-full min-w-96">
+              {hotelOptions.map((option) => (
+                <SelectItem key={option.id} value={option.id.toString()}>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="font-medium">{option.name}</span>
+                    <span className="text-xs text-muted-foreground">{formatCurrency(option.pricePerPersonPerNight)} / orang / malam</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <input type="hidden" name="hotelOptionId" value={hotelOptionId} />
         </div>
-      </div>
+      </Reveal>
 
       {/* SECTION 2: DATA PEMESAN */}
-      <div className="space-y-4 rounded-xl overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 p-6">
-        <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
-          <User className="h-5 w-5 text-primary dark:text-primary" />
+      <Reveal delay={0.1} className="space-y-4 rounded-lg overflow-hidden bg-card/60 backdrop-blur-sm border border-border p-6">
+        <div className="flex items-center gap-2 border-b border-border pb-3 mb-4">
+          <User className="h-5 w-5 text-primary" />
           <h3 className="text-sm font-bold text-card-foreground tracking-tight">Data Pemesan</h3>
         </div>
 
@@ -116,9 +136,13 @@ export function BookingForm({
             <Input
               id="customerName"
               name="customerName"
-              className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value.replace(/[^a-zA-Z\s]/g, ""))}
+              placeholder="Contoh: John Doe"
+              className="border-border bg-background"
               required
             />
+            <p className="text-xs text-muted-foreground">Huruf dan spasi saja</p>
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="customerEmail" className="flex items-center gap-2 text-card-foreground font-medium">
@@ -129,9 +153,15 @@ export function BookingForm({
               id="customerEmail"
               name="customerEmail"
               type="email"
-              className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+              value={customerEmail}
+              onChange={(e) => setCustomerEmail(formatEmail(e.target.value))}
+              placeholder="nama@example.com"
+              className="border-border bg-background"
               required
             />
+            {customerEmail && !validateEmail(customerEmail) && (
+              <p className="text-xs text-destructive">Email tidak valid</p>
+            )}
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="customerPhone" className="flex items-center gap-2 text-card-foreground font-medium">
@@ -142,53 +172,59 @@ export function BookingForm({
               id="customerPhone"
               name="customerPhone"
               type="tel"
-              className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
+              value={customerPhone}
+              onChange={(e) => setCustomerPhone(formatPhoneNumber(e.target.value))}
+              placeholder="+62 812 3456 7890"
+              className="border-border bg-background"
               required
             />
+            {customerPhone && !validatePhoneNumber(customerPhone) && (
+              <p className="text-xs text-destructive">Nomor telepon tidak valid (minimal 10 digit)</p>
+            )}
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* SECTION 3: RINCIAN HARGA */}
-      <div className="rounded-xl overflow-hidden bg-gradient-to-br from-indigo-50/40 to-secondary-50/40 dark:from-indigo-950/20 dark:to-slate-900/40 border border-primary-100/50 dark:border-primary-900/30 p-6">
+      <Reveal delay={0.2} className="rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 p-6">
         <div className="flex items-center gap-2 mb-4">
-          <Calculator className="h-5 w-5 text-primary dark:text-primary" />
+          <Calculator className="h-5 w-5 text-primary" />
           <h3 className="text-sm font-bold text-card-foreground tracking-tight">Rincian Harga</h3>
         </div>
         <dl className="space-y-3 text-sm">
           <div className="flex justify-between items-center pb-2">
-            <dt className="text-slate-600 dark:text-slate-400">
+            <dt className="text-muted-foreground">
               Hotel ({nights} malam × {participantCount || 0} orang)
             </dt>
             <dd className="font-semibold text-card-foreground">{formatCurrency(breakdown.hotelTotal)}</dd>
           </div>
           <div className="flex justify-between items-center pb-2">
-            <dt className="text-slate-600 dark:text-slate-400">
+            <dt className="text-muted-foreground">
               Aktivitas ({participantCount || 0} orang)
             </dt>
             <dd className="font-semibold text-card-foreground">{formatCurrency(breakdown.activitiesTotal)}</dd>
           </div>
           <div className="flex justify-between items-center pb-2">
-            <dt className="text-slate-600 dark:text-slate-400">Kendaraan (per trip)</dt>
+            <dt className="text-muted-foreground">Kendaraan (per trip)</dt>
             <dd className="font-semibold text-card-foreground">{formatCurrency(breakdown.vehicleTotal)}</dd>
           </div>
-          <div className="flex justify-between items-center border-t border-primary-200/50 dark:border-primary-900/50 pt-3 font-bold">
+          <div className="flex justify-between items-center border-t border-primary/20 pt-3 font-bold">
             <dt className="text-card-foreground">Total Pembayaran</dt>
-            <dd className="text-lg text-primary dark:text-primary">{formatCurrency(breakdown.grandTotal)}</dd>
+            <dd className="text-lg text-primary">{formatCurrency(breakdown.grandTotal)}</dd>
           </div>
         </dl>
-      </div>
+      </Reveal>
 
       {state.error && (
-        <div className="flex items-start gap-3 rounded-lg bg-destructive-50 dark:bg-destructive-950/20 border border-destructive-200 dark:border-destructive-900/40 p-3">
-          <p className="text-sm text-destructive-700 dark:text-destructive-300 font-medium">{state.error}</p>
+        <div className="flex items-start gap-3 rounded-lg bg-destructive/10 border border-destructive/30 p-3">
+          <p className="text-sm text-destructive font-medium">{state.error}</p>
         </div>
       )}
 
       <Button
         type="submit"
         disabled={isPending || seatsRemaining <= 0}
-        className="w-full bg-primary hover:bg-primary text-white font-semibold py-3 rounded-lg shadow-sm hover:shadow transition-all"
+        className="w-full font-semibold py-3 shadow-sm hover:shadow transition-all"
       >
         {isPending ? "Memproses Booking..." : "Konfirmasi Booking"}
       </Button>
