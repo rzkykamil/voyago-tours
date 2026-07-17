@@ -4,7 +4,14 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
 function parsePrice(formData: FormData) {
-  const price = Number(formData.get("price"));
+  const raw = String(formData.get("price") ?? "").trim();
+  // Indonesian convention uses "." as a thousands separator (e.g. "50.000").
+  // Strip everything except digits so the value parses correctly.
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length === 0) {
+    throw new Error("Harga tidak valid.");
+  }
+  const price = Number(digits);
   if (!Number.isFinite(price) || price < 0) {
     throw new Error("Harga tidak valid.");
   }

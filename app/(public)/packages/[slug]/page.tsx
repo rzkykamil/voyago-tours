@@ -80,6 +80,15 @@ export default async function PackageDetailPage({ params }: PackagePageProps) {
 
       {/* 2. HERO / HEADER INFO */}
       <Reveal className="space-y-4">
+        {pkg.imageUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={pkg.imageUrl}
+            alt={pkg.name}
+            className="h-64 w-full rounded-lg object-cover ring-1 ring-card-foreground/10"
+          />
+        )}
+
         <div className="coordinate-label">
           {pkg.destination} — {pkg.durationDays} Hari
         </div>

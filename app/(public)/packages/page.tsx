@@ -25,7 +25,10 @@ export default async function PackagesPage() {
   const packages = await prisma.package.findMany({
     orderBy: { name: "asc" },
     include: {
-      schedules: { orderBy: { departureDate: "asc" } },
+      schedules: {
+        orderBy: { departureDate: "asc" },
+        include: { vehicle: true },
+      },
     },
   });
 
@@ -49,13 +52,25 @@ export default async function PackagesPage() {
       {/* GRID KARTU PAKET */}
       <RevealStagger className="grid gap-6 sm:grid-cols-2">
         {packages.map((pkg) => {
-          const nextSchedule = pkg.schedules.find(
+          const upcoming = pkg.schedules.filter(
             (schedule) => schedule.departureDate >= now
           );
+          const nextAvailable = upcoming.find(
+            (schedule) => schedule.vehicle.capacity - schedule.seatsBooked > 0
+          );
+          const nextSchedule = nextAvailable ?? upcoming[0];
 
           return (
             <RevealItem key={pkg.id}>
             <TicketCard>
+              {pkg.imageUrl && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={pkg.imageUrl}
+                  alt={pkg.name}
+                  className="h-40 w-full object-cover"
+                />
+              )}
               <TicketCardHeader>
                 <TicketCardMeta>{pkg.destination}</TicketCardMeta>
                 <TicketCardHeading>{pkg.name}</TicketCardHeading>
@@ -83,7 +98,11 @@ export default async function PackagesPage() {
 
               <TicketCardStub className="flex items-center justify-between">
                 <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                  {nextSchedule ? "Tersedia" : "Belum ada jadwal"}
+                  {!nextSchedule
+                    ? "Belum ada jadwal"
+                    : nextAvailable
+                      ? "Tersedia"
+                      : "Penuh"}
                 </div>
                 <Link href={`/packages/${pkg.slug}`}>
                   <Button size="sm" variant="ghost" className="gap-1 h-6">

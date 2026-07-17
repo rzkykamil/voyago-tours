@@ -14,6 +14,7 @@ import { Reveal, RevealStagger, RevealItem } from "@/components/reveal";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 import { Users, TrendingUp, Clock, CheckCircle, XCircle } from "lucide-react";
+import { BookingActions } from "./bookings/booking-actions";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard — Voyago Tours",
@@ -141,6 +142,7 @@ export default async function AdminDashboardPage() {
                 <TableHead className="coordinate-label">Tanggal</TableHead>
                 <TableHead className="coordinate-label">Total</TableHead>
                 <TableHead className="coordinate-label">Status</TableHead>
+                <TableHead className="coordinate-label">Aksi</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -174,11 +176,14 @@ export default async function AdminDashboardPage() {
                       {statusLabel[booking.status]}
                     </Badge>
                   </TableCell>
+                  <TableCell>
+                    <BookingActions bookingId={booking.id} currentStatus={booking.status} />
+                  </TableCell>
                 </TableRow>
               ))}
               {bookings.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8">
+                  <TableCell colSpan={7} className="text-center py-8">
                     <div className="flex flex-col items-center gap-2">
                       <XCircle className="h-8 w-8 text-slate-300 dark:text-slate-600" />
                       <p className="text-sm text-muted-foreground font-medium">

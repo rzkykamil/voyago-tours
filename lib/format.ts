@@ -8,6 +8,15 @@ export function formatCurrency(amount: number) {
   return currencyFormatter.format(amount);
 }
 
+const numberFormatter = new Intl.NumberFormat("id-ID", {
+  maximumFractionDigits: 0,
+});
+
+/** Format a whole number with Indonesian thousands separators (e.g. 50000 -> "50.000"). */
+export function formatNumber(amount: number) {
+  return numberFormatter.format(amount);
+}
+
 const dateFormatter = new Intl.DateTimeFormat("id-ID", {
   day: "numeric",
   month: "long",

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Compass } from "lucide-react";
+import { Compass, UserRound } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function PublicLayout({
@@ -37,6 +37,19 @@ export default function PublicLayout({
             >
               Tentang Kami
             </Link>
+            <Link
+              href="/contact"
+              className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
+            >
+              Kontak
+            </Link>
+            <Link
+              href="/account"
+              className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <UserRound className="h-4 w-4" />
+              Akun
+            </Link>
           </nav>
 
           <ThemeToggle />
@@ -66,6 +79,14 @@ export default function PublicLayout({
             <span className="text-muted-foreground/40">•</span>
             <Link href="/privacy" className="hover:text-foreground transition-colors">
               Kebijakan Privasi
+            </Link>
+            <span className="text-muted-foreground/40">•</span>
+            <Link href="/account" className="hover:text-foreground transition-colors">
+              Akun
+            </Link>
+            <span className="text-muted-foreground/40">•</span>
+            <Link href="/contact" className="hover:text-foreground transition-colors">
+              Kontak
             </Link>
           </div>
 

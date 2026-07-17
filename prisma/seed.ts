@@ -117,7 +117,7 @@ async function main() {
       },
       schedules: {
         create: [
-          { vehicleId: hiace.id, departureDate: new Date("2026-08-20"), seatsBooked: 10 },
+          { vehicleId: hiace.id, departureDate: new Date("2026-08-20"), seatsBooked: 12 },
           { vehicleId: hiace.id, departureDate: new Date("2026-09-18"), seatsBooked: 12 },
         ],
       },

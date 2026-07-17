@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Reveal } from "@/components/reveal";
 import { prisma } from "@/lib/prisma";
+import { formatNumber } from "@/lib/format";
 import { updateActivityPrice, updateHotelPrice, updateVehiclePrice } from "./actions";
 import { Home, Car, Sparkles } from "lucide-react";
 
@@ -57,10 +58,10 @@ export default async function AdminPricingPage() {
                   className="flex items-center gap-2"
                 >
                   <Input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     name="price"
-                    min={0}
-                    defaultValue={hotel.pricePerPersonPerNight}
+                    defaultValue={formatNumber(hotel.pricePerPersonPerNight)}
                     className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
                   />
                   <Button type="submit" size="sm" className="bg-primary hover:bg-primary">
@@ -94,10 +95,10 @@ export default async function AdminPricingPage() {
                   className="flex items-center gap-2"
                 >
                   <Input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     name="price"
-                    min={0}
-                    defaultValue={vehicle.pricePerTrip}
+                    defaultValue={formatNumber(vehicle.pricePerTrip)}
                     className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
                   />
                   <Button type="submit" size="sm" className="bg-primary hover:bg-primary">
@@ -133,10 +134,10 @@ export default async function AdminPricingPage() {
                         className="flex items-center gap-2"
                       >
                         <Input
-                          type="number"
+                          type="text"
+                          inputMode="numeric"
                           name="price"
-                          min={0}
-                          defaultValue={activity.pricePerPerson}
+                          defaultValue={formatNumber(activity.pricePerPerson)}
                           className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50"
                         />
                         <Button type="submit" size="sm" className="bg-primary hover:bg-primary">
