@@ -34,7 +34,7 @@ export function RoutePath({
       className={cn("w-full overflow-visible", className)}
       fill="none"
       aria-hidden="true"
-    >
+    > 
       <motion.path
         d={d}
         stroke="var(--color-pine)"
