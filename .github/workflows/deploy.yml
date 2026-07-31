@@ -1,0 +1,14 @@
+name: Deploy Voyago Tours
+on:
+  push:
+    branches: [ master ]
+jobs:
+  deploy:
+    runs-on: [self-hosted, voyago]
+    steps:
+      - name: Deploy
+        run: |
+          cd /home/home_server/stacks/voyago-tours/src
+          git pull origin master
+          cd /home/home_server/stacks/voyago-tours
+          docker compose up -d --build
