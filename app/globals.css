@@ -135,6 +135,17 @@
   --sidebar-ring: var(--color-brass);
 }
 
+/* Homepage motion tokens — mirrors lib/motion-tokens.ts. Used for hover/CSS
+   transitions only; scroll-linked motion is driven by GSAP in components/home. */
+:root {
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-drift: cubic-bezier(0.33, 1, 0.68, 1);
+  --duration-fast: 240ms;
+  --duration-base: 420ms;
+}
+
 @layer components {
   .route-dashes {
     height: 1rem;
@@ -153,6 +164,22 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted-foreground);
+  }
+  /* Vertical counterpart of .route-dashes — the homepage spine rail. */
+  .spine-rail {
+    width: 1rem;
+    -webkit-mask-image: radial-gradient(circle 2.5px at 8px 10px, transparent 98%, black 100%);
+    mask-image: radial-gradient(circle 2.5px at 8px 10px, transparent 98%, black 100%);
+    -webkit-mask-repeat: repeat-y;
+    mask-repeat: repeat-y;
+    -webkit-mask-size: 16px 20px;
+    mask-size: 16px 20px;
+  }
+  .spine-rail--track {
+    background: linear-gradient(to bottom, transparent, var(--color-pine) 4%, var(--color-pine) 96%, transparent);
+  }
+  .spine-rail--fill {
+    background: linear-gradient(to bottom, var(--color-brass), var(--color-brass));
   }
 }
 

@@ -17,6 +17,9 @@
 
 ## Day 3 — Polish & Publish
 - [x] Responsive/UI polish pass on public pages
+- [x] Redesign homepage (`app/(public)/page.tsx`) — art-directed 7-section
+      layout with scroll-linked motion (GSAP/ScrollTrigger + Lenis), see
+      `docs/homepage-art-direction.md`
 - [x] Edge case check: overbooked vehicle, 0 participants, missing fields
 - [ ] Write final README (screenshots, features, setup steps)
 - [ ] `git init`, initial commit, verify `.env` not tracked
